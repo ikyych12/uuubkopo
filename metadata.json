@@ -1,0 +1,6 @@
+{
+  "name": "Video Share & Analytics",
+  "description": "Platform streaming video real-time dengan dashboard admin, tautan tonton publik tanpa login, dan analitik penonton real-time.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

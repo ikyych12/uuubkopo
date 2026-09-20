@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Videos collection:
+    // Anyone can read videos (users do not need to login to watch).
+    // Anyone can increment view counts or active viewer stats.
+    // Authenticated admin can create, update, delete videos.
+    match /videos/{videoId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update: if true;
+      allow delete: if request.auth != null;
+    }
+
+    // Viewer sessions for real-time analytics:
+    // Viewers without login can record their watch session and send heartbeats.
+    // Anyone can read sessions to display live view counters.
+    match /viewer_sessions/{sessionId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if request.auth != null;
+    }
+
+    // Connection test document
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}

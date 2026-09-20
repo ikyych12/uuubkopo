@@ -1,0 +1,102 @@
+{
+  "entities": {
+    "Video": {
+      "title": "Video",
+      "description": "Video metadata and analytics counter",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Judul video"
+        },
+        "description": {
+          "type": "string",
+          "description": "Deskripsi video"
+        },
+        "videoUrl": {
+          "type": "string",
+          "description": "URL sumber video"
+        },
+        "thumbnailUrl": {
+          "type": "string",
+          "description": "URL atau preview gambar thumbnail"
+        },
+        "duration": {
+          "type": "number",
+          "description": "Durasi video dalam detik"
+        },
+        "viewsCount": {
+          "type": "number",
+          "description": "Total jumlah penonton"
+        },
+        "likesCount": {
+          "type": "number",
+          "description": "Total suka"
+        },
+        "activeViewers": {
+          "type": "number",
+          "description": "Jumlah penonton aktif saat ini"
+        },
+        "uploadedBy": {
+          "type": "string",
+          "description": "Email atau UID pengunggah admin"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Waktu pembuatan ISO"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Waktu pembaruan ISO"
+        }
+      },
+      "required": ["title", "videoUrl", "createdAt"]
+    },
+    "ViewerSession": {
+      "title": "ViewerSession",
+      "description": "Sesi penonton real-time untuk analitik",
+      "type": "object",
+      "properties": {
+        "videoId": {
+          "type": "string",
+          "description": "ID video yang ditonton"
+        },
+        "viewerSessionId": {
+          "type": "string",
+          "description": "ID unik sesi penonton tanpa login"
+        },
+        "joinedAt": {
+          "type": "string",
+          "description": "Waktu mulai menonton"
+        },
+        "lastActiveAt": {
+          "type": "string",
+          "description": "Waktu heartbeat terakhir"
+        },
+        "watchedSeconds": {
+          "type": "number",
+          "description": "Total detik ditonton"
+        },
+        "device": {
+          "type": "string",
+          "description": "Perangkat penonton"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Apakah video ditonton sampai selesai"
+        }
+      },
+      "required": ["videoId", "viewerSessionId", "joinedAt", "lastActiveAt"]
+    }
+  },
+  "firestore": {
+    "/videos/{videoId}": {
+      "schema": "Video",
+      "description": "Koleksi video publik yang dapat ditonton siapa saja tanpa login"
+    },
+    "/viewer_sessions/{sessionId}": {
+      "schema": "ViewerSession",
+      "description": "Koleksi sesi penonton real-time untuk analitik"
+    }
+  }
+}
